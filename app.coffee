@@ -37,4 +37,4 @@ app.configure "development", ->
 app.get "/", routes.index
 app.get "/users", user.list
 app.listen 3000, ->
-  console.log "Server listening on port %d in %s mode", app.address().port, app.settings.env
+  console.log "==> Server listening on port %d in %s mode", app.address().port, app.settings.env
