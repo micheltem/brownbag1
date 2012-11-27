@@ -6,7 +6,7 @@ Module dependencies.
 
 
 (function() {
-  var app, db, express, http, io, nano, path, routes, socket, user;
+  var app, db, express, http, io, nano, path, routes, socket, user, users;
 
   express = require("express");
 
@@ -52,10 +52,15 @@ Module dependencies.
     return console.log("==> Server listening on port %d in %s mode", app.address().port, app.settings.env);
   });
 
+  users = ["michel", "guest"];
+
   io.sockets.on("connection", function(socket) {
     console.log("User connected");
     socket.emit("message", {
-      hello: "world"
+      message: "Welcome to the brownbag1 chat"
+    });
+    socket.on("userName", function(data) {
+      return console.log;
     });
     return socket.on("chat", function(data) {
       return console.log(data);

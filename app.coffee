@@ -40,9 +40,17 @@ app.listen 3000, ->
   console.log "==> Server listening on port %d in %s mode", app.address().port, app.settings.env
 
 
+users = ["michel", "guest"]
+
+
 io.sockets.on "connection", (socket) ->
   console.log "User connected"
-  socket.emit "message", hello: "world"
+  socket.emit "message",
+    message: "Welcome to the brownbag1 chat"
+
+  socket.on "userName", (data) ->
+    console.log
+    # console.log users.contains(data)
 
   socket.on "chat", (data) ->
     console.log data

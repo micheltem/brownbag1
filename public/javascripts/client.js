@@ -15,9 +15,12 @@
     app.server.on("connect", function() {
       _log("connected to the server");
       _log("Connected to the server" + arguments);
-      return app.server.on("message", function(message) {
-        _log("Received message");
-        return _s_log(message);
+      return app.server.on("message", function(data) {
+        var user;
+        _log("Received message: " + data.message);
+        alert(data.message);
+        user = prompt("Who are you?");
+        return app.server.emit("userName", user);
       });
     });
     return window.app = app;
