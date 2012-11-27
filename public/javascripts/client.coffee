@@ -7,14 +7,16 @@ $(document).ready ->
 
 	_log = (message) ->
 		console.log message
-	s_log = (o) ->
+	_s_log = (o) ->
 		console.log JSON.stringify o
 
 
-	((server) ->
-		server.on "connect", ->
-			log "Connected to the server" + arguments
+	app.server.on "connect", ->
+		_log "connected to the server"
+		_log "Connected to the server" + arguments
+		app.server.on "message", (message) ->
+			_log "Received message"
+			_s_log message
 
-		server.on "userEligible", (response) ->
 
-
+	window.app = app

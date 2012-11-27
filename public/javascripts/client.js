@@ -2,9 +2,25 @@
 (function() {
 
   $(document).ready(function() {
-    window.app = {};
-    window.app.server = io.connect("/");
-    return console.log("Hello");
+    var app, _log, _s_log;
+    app = {};
+    app.server = io.connect("/");
+    console.log("Hello");
+    _log = function(message) {
+      return console.log(message);
+    };
+    _s_log = function(o) {
+      return console.log(JSON.stringify(o));
+    };
+    app.server.on("connect", function() {
+      _log("connected to the server");
+      _log("Connected to the server" + arguments);
+      return app.server.on("message", function(message) {
+        _log("Received message");
+        return _s_log(message);
+      });
+    });
+    return window.app = app;
   });
 
 }).call(this);

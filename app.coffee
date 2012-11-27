@@ -38,3 +38,13 @@ app.get "/", routes.index
 app.get "/users", user.list
 app.listen 3000, ->
   console.log "==> Server listening on port %d in %s mode", app.address().port, app.settings.env
+
+
+io.sockets.on "connection", (socket) ->
+  console.log "User connected"
+  socket.emit "message", hello: "world"
+
+  socket.on "chat", (data) ->
+    console.log data
+
+

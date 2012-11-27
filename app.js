@@ -52,4 +52,14 @@ Module dependencies.
     return console.log("==> Server listening on port %d in %s mode", app.address().port, app.settings.env);
   });
 
+  io.sockets.on("connection", function(socket) {
+    console.log("User connected");
+    socket.emit("message", {
+      hello: "world"
+    });
+    return socket.on("chat", function(data) {
+      return console.log(data);
+    });
+  });
+
 }).call(this);
