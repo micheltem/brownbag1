@@ -3,6 +3,7 @@
 Module dependencies.
 ###
 express = require("express")
+socket = require("socket.io")
 routes = require("./routes")
 user = require("./routes/user")
 http = require("http")
@@ -11,11 +12,14 @@ nano = require("nano")('http://localhost:5984')
 
 db = nano.db.use('brownbag1')
 
-db.insert {name: "turtle", size: "small"}, "turtle", (err, body, header) ->
-  console.log err if err?
-  console.log body
+# db.insert {name: "turtle", size: "small"}, "turtle", (err, body, header) ->
+#   console.log err if err?
+#   console.log body
 
-app = express()
+app = module.exports = express.createServer()
+io = socket.listen(app)
+
+
 app.configure ->
   app.set "port", process.env.PORT or 3000
   app.set "views", __dirname + "/views"
@@ -32,5 +36,5 @@ app.configure "development", ->
 
 app.get "/", routes.index
 app.get "/users", user.list
-http.createServer(app).listen app.get("port"), ->
-  console.log "Express server listening on port " + app.get("port")
+app.listen 3000, ->
+  console.log "Server listening on port %d in %s mode", app.address().port, app.settings.env
