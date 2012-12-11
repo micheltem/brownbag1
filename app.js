@@ -52,18 +52,25 @@ Module dependencies.
     return console.log("==> Server listening on port %d in %s mode", app.address().port, app.settings.env);
   });
 
-  users = ["michel", "guest"];
+  users = [];
 
   io.sockets.on("connection", function(socket) {
     console.log("User connected");
     socket.emit("message", {
       message: "Welcome to the brownbag1 chat"
     });
-    socket.on("userName", function(data) {
-      return console.log;
+    socket.on("userName", function(user) {
+      console.log(user + " has joined");
+      users.push(user);
+      return socket.broadcast.emit("message", {
+        message: user + " has joined"
+      });
     });
     return socket.on("chat", function(data) {
-      return console.log(data);
+      console.log(data);
+      return socket.broadcast.emit("message", {
+        message: data
+      });
     });
   });
 

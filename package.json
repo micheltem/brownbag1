@@ -1,25 +1,23 @@
 {
   "name": "application-name",
-  "version": "0.0.1",
+  "version": "0.0.1-1",
   "private": true,
   "scripts": {
-    "start": "app"
+    "start": "app.js"
   },
   "dependencies": {
     "express": "2.5.x",
     "jade": "*",
-	"nano": "3.3.x",
-	"socket.io": "0.9.x"
+    "stylus": "0.27.x",
+    "nano": "3.3.x",
+    "socket.io": "0.9.x"
   },
   "subdomain": "dev.trakkem",
   "domains": [
-      "dev.trakkem.com",
-      "trakkem.com",
-      "www.trakkem.com"
-    ],
-  "scripts": {
-    "start": "app.js"
-  },
+    "dev.trakkem.com",
+    "trakkem.com",
+    "www.trakkem.com"
+  ],
   "engines": {
     "node": "0.8.x"
   }
